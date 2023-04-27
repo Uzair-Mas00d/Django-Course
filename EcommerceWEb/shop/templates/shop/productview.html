@@ -1,0 +1,50 @@
+{% extends 'shop/basic.html' %}
+{% block title %} {{product.product_name}} - My Awesom Cart {% endblock %}
+
+{% block body %}
+    <div class="container my-4">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row">
+                    <img src="/media/{{product.image}}" width="233px" height="385px">
+                </div>
+                <div class="row">
+                    <button class="btn btn-primary col-md-3 mx-3">Buy Now</button>
+                    <button class="btn btn-primary col-md-3">Add To Cart</button>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <h5>{{product.product_name}}</h5>
+                <p><b>${{product.price}}</b></p>
+                <p>{{product.desc}}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+<!--js Blocked-->
+{% block js %} 
+<script>
+  if(localStorage.getItem('cart') == null){
+    var cart = {};
+  }
+  else{
+    cart = JSON.parse(localStorage.getItem('cart'));
+    document.getElementById('cart').innerHTML = Object.keys(cart).length;
+  }
+  
+  $('.cart').click(function(){
+    var idstr = this.id.toString();
+    if(cart[idstr] != undefined){
+      cart[idstr] = cart[idstr] + 1;
+    }
+    else{
+      cart[idstr] = 1;
+    }
+    localStorage.setItem('cart',JSON.stringify(cart));
+    document.getElementById('cart').innerHTML = Object.keys(cart).length;
+  });
+  let popcrt = document.getElementById('popcart').setAttribute('data-bs-content','<h5>cart</h5');
+  const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+  const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
+</script>
+{% endblock %}

@@ -51,9 +51,10 @@
                 encode: true
             })
             .done(function(data){
+                $('#citems').empty()
                 data = JSON.parse(data); 
-                updates = data[0] 
-                if (updates.length > 0 & updates != {}){             
+                if (data['status'] == "success"){ 
+                    updates = data['updates']            
                     for(let i = 0; i < updates.length; i++){                
                         let text = updates[i]['text'];
                         let time = updates[i]['time'];
@@ -64,27 +65,27 @@
                         </li>`;
                         $('#items').append(mystr);
                     }
+                    // Fill in order Details
+                    cart = JSON.parse(data['itemJson']);
+                    console.log(cart)
+                    for(let item in cart){                
+                        let name = cart[item][1];
+                        let qty = cart[item][0];
+
+                        mystr = `<li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">${name}</div>
+                            <span class="badge bg-primary rounded-pill">${qty}</span>
+                            </li>`;
+                        $('#citems').append(mystr);
+                    } 
                 }
                 else{
                     mystr = `<li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="ms-2 me-auto">Sorry.. Wrong Id or Email</div>
                         </li>`;
                     $('#items').append(mystr);
-                }
-                // Fill in order Details
-                $('#citems').empty();
-                cart = JSON.parse(data[1]);
-                console.log(cart)
-                for(let item in cart){                
-                    let name = cart[item][1];
-                    let qty = cart[item][0];
-
-                    mystr = `<li class="list-group-item d-flex justify-content-between align-items-start">
-                        <div class="ms-2 me-auto">${name}</div>
-                        <span class="badge bg-primary rounded-pill">${qty}</span>
-                        </li>`;
                     $('#citems').append(mystr);
-                } 
+                }                
             });
             event.preventDefault();
         });

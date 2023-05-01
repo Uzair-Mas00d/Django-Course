@@ -17,6 +17,7 @@
             <h2>Step 2 - Enter Address & Other Details:</h2>
             <form method="post" action="/shop/checkout/" class="row g-3">{% csrf_token %}
                 <input type="hidden" name="itemsJson" id="itemsJson">
+                <input type="hidden" name="amount" id="amount">
                 <div class="col-md-6">
                     <label for="inputname" class="form-label">Name</label>
                     <input type="text" class="form-control" id="name" name="name">
@@ -90,6 +91,7 @@
     document.getElementById('cart').innerHTML = sum;
     document.getElementById('totalPrice').innerHTML = totalPrice;
     $('#itemsJson').val(JSON.stringify(cart));
+    $('#amount').val($('#totalPrice').html())
   </script>
   {% if thank %}
     <script>
@@ -97,5 +99,5 @@
       localStorage.clear();
       document.location = '/shop';
     </script>
-  {% endif %}       
+  {% endif %}      
 {% endblock %}

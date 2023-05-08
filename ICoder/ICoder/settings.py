@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 from django.contrib.messages import constants as messages
 
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'home.apps.HomeConfig',
     'blog.apps.BlogConfig',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [
@@ -119,6 +121,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,'static')
+]
 
 MESSAGE_TAGS = {
    messages.ERROR: 'danger'

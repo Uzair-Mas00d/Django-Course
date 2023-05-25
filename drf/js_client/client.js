@@ -151,7 +151,7 @@ function getProductList(){
 
 // validateJWTToken()
 
-const searchClient = algoliasearch('WR7QTXQKRL', '36897ec1ed5118486f52c9b129e6cc83'); // second way of handling search
+const searchClient = algoliasearch('Your Algo Username', 'Your Algo Api'); // second way of handling search
 
 const search = instantsearch({
   indexName: 'cfe_Product',

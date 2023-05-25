@@ -169,8 +169,8 @@ REST_FRAMEWORK = {
 
 
 ALGOLIA = {
-    'APPLICATION_ID': 'WR7QTXQKRL',
-    'API_KEY': 'b8092f3c9682a758c1962742fe4aee1c',
+    'APPLICATION_ID': 'Your Algo Username',
+    'API_KEY': 'Your Algo Api',
     'INDEX_PREFIX':'cfe',
 }
 
